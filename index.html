@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parth Mistry — Software Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #05030f;
+  --bg2: #080516;
+  --surface: #0d0a1e;
+  --surface2: #120f24;
+  --accent: #b44fff;
+  --accent2: #7b2fff;
+  --accent3: #00f5ff;
+  --accent4: #ff2d78;
+  --text: #e8e0ff;
+  --muted: #4a4070;
+  --border: #1e1640;
+  --grid: rgba(100, 60, 180, 0.08);
+  --glow: rgba(180, 79, 255, 0.3);
+  --glow2: rgba(0, 245, 255, 0.2);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Rajdhani', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none; z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.12) 2px, rgba(0,0,0,0.12) 4px);
+  pointer-events: none; z-index: 999;
+  animation: scanMove 10s linear infinite;
+}
+@keyframes scanMove { 0%{background-position:0 0} 100%{background-position:0 80px} }
+
+/* CURSOR */
+.cursor { width:6px; height:6px; background:var(--accent3); position:fixed; top:0; left:0; pointer-events:none; z-index:9999; box-shadow:0 0 10px var(--accent3),0 0 20px var(--accent3); }
+.cursor-ring { width:28px; height:28px; border:1px solid var(--accent); position:fixed; top:0; left:0; pointer-events:none; z-index:9998; transition:all 0.1s ease; box-shadow:0 0 8px var(--glow),inset 0 0 8px var(--glow); }
+.crosshair-h { position:fixed; height:1px; width:100vw; top:0; left:0; background:rgba(180,79,255,0.1); pointer-events:none; z-index:9990; }
+.crosshair-v { position:fixed; width:1px; height:100vh; left:0; top:0; background:rgba(180,79,255,0.1); pointer-events:none; z-index:9990; }
+
+/* GLITCH */
+@keyframes glitch1 {
+  0%,90%,100%{clip-path:inset(0 0 100% 0);transform:translate(0)}
+  92%{clip-path:inset(10% 0 60% 0);transform:translate(-4px,2px)}
+  94%{clip-path:inset(50% 0 20% 0);transform:translate(4px,-2px)}
+  96%{clip-path:inset(30% 0 40% 0);transform:translate(-2px,1px)}
+}
+@keyframes glitch2 {
+  0%,88%,100%{clip-path:inset(0 0 100% 0);transform:translate(0)}
+  90%{clip-path:inset(40% 0 30% 0);transform:translate(3px,-1px);color:var(--accent3)}
+  93%{clip-path:inset(70% 0 10% 0);transform:translate(-3px,2px);color:var(--accent4)}
+}
+.glitch { position:relative; display:inline-block; }
+.glitch::before,.glitch::after { content:attr(data-text); position:absolute; top:0; left:0; width:100%; height:100%; }
+.glitch::before { color:var(--accent3); animation:glitch1 5s infinite; }
+.glitch::after { color:var(--accent4); animation:glitch2 5s infinite 0.5s; }
+
+/* NAV */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:20px 48px;
+  background:linear-gradient(180deg,rgba(5,3,15,0.97) 0%,transparent 100%);
+  border-bottom:1px solid rgba(100,60,180,0.12);
+}
+.nav-logo { font-family:'Orbitron',monospace; font-weight:900; font-size:16px; color:var(--accent); letter-spacing:4px; text-shadow:0 0 20px var(--glow); }
+.nav-logo span { color:var(--accent3); }
+.nav-links { display:flex; gap:40px; list-style:none; }
+.nav-links a { font-family:'Share Tech Mono',monospace; color:var(--muted); text-decoration:none; font-size:10px; letter-spacing:3px; text-transform:uppercase; transition:color 0.2s,text-shadow 0.2s; }
+.nav-links a:hover { color:var(--accent3); text-shadow:0 0 10px var(--glow2); }
+
+.status-bar { position:fixed; top:6px; right:48px; font-family:'Share Tech Mono',monospace; font-size:8px; color:var(--accent2); letter-spacing:2px; z-index:101; opacity:0.5; }
+
+/* SCROLL PROGRESS */
+#scrollProgress {
+  position: fixed; top: 0; left: 0;
+  height: 2px; width: 0%;
+  background: linear-gradient(90deg, var(--accent2), var(--accent), var(--accent3));
+  z-index: 9997;
+  box-shadow: 0 0 8px var(--glow), 0 0 16px var(--glow2);
+  transition: width 0.05s linear;
+}
+
+/* HERO */
+#hero { min-height:100vh; display:grid; grid-template-columns:1fr 1fr; position:relative; overflow:hidden; }
+.hero-corner { position:absolute; font-family:'Share Tech Mono',monospace; font-size:9px; color:var(--muted); letter-spacing:2px; }
+.hc-tl{top:100px;left:48px} .hc-tr{top:100px;right:48px;text-align:right} .hc-bl{bottom:40px;left:48px} .hc-br{bottom:40px;right:48px;text-align:right}
+
+.hero-left { display:flex; flex-direction:column; justify-content:center; padding:80px 48px 0; position:relative; z-index:2; }
+.hero-tag { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:4px; text-transform:uppercase; color:var(--accent3); margin-bottom:28px; display:flex; align-items:center; gap:12px; opacity:0; animation:fadeUp 0.8s ease 0.3s forwards; }
+.hero-tag::before { content:''; width:30px; height:1px; background:var(--accent3); box-shadow:0 0 6px var(--accent3); }
+.blink { animation:blink 1s step-end infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+.hero-name { font-family:'Orbitron',monospace; font-weight:900; font-size:clamp(44px,5.5vw,82px); line-height:1.0; letter-spacing:2px; margin-bottom:6px; opacity:0; animation:fadeUp 0.8s ease 0.5s forwards; text-shadow:0 0 40px var(--glow); }
+.hero-name-sub { font-family:'Orbitron',monospace; font-weight:400; font-size:clamp(20px,2.4vw,34px); color:var(--accent3); letter-spacing:8px; margin-bottom:36px; text-shadow:0 0 20px var(--glow2); opacity:0; animation:fadeUp 0.8s ease 0.65s forwards; }
+.hero-desc { font-family:'Share Tech Mono',monospace; font-size:12px; line-height:2.1; color:#7a6fa0; max-width:440px; margin-bottom:48px; border-left:2px solid var(--accent2); padding-left:20px; opacity:0; animation:fadeUp 0.8s ease 0.8s forwards; }
+.hero-cta { display:flex; gap:16px; opacity:0; animation:fadeUp 0.8s ease 1s forwards; }
+
+.btn-primary { font-family:'Share Tech Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; text-decoration:none; padding:14px 28px; background:transparent; color:var(--accent); border:1px solid var(--accent); position:relative; overflow:hidden; cursor:none; transition:color 0.3s; box-shadow:0 0 20px rgba(180,79,255,0.15); }
+.btn-primary::before { content:''; position:absolute; inset:0; background:var(--accent); transform:translateX(-101%); transition:transform 0.3s ease; z-index:-1; }
+.btn-primary:hover { color:#000; } .btn-primary:hover::before { transform:translateX(0); }
+.btn-outline { font-family:'Share Tech Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; text-decoration:none; padding:14px 28px; color:var(--accent3); border:1px solid rgba(0,245,255,0.3); cursor:none; transition:border-color 0.2s,box-shadow 0.2s; }
+.btn-outline:hover { border-color:var(--accent3); box-shadow:0 0 20px var(--glow2); }
+
+.hero-right { display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+.hex-bg { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; opacity:0.12; }
+.hex-bg svg { width:100%; height:100%; }
+
+.terminal-card { background:rgba(13,10,30,0.92); border:1px solid var(--accent2); max-width:360px; width:100%; position:relative; z-index:2; box-shadow:0 0 40px var(--glow),0 0 80px rgba(123,47,255,0.1); animation:fadeIn 1s ease 1.2s both; }
+.terminal-card::before { content:''; position:absolute; top:-1px; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--accent),var(--accent3),transparent); }
+.c-deco { position:absolute; width:14px; height:14px; }
+.c-deco.tl{top:0;left:0;border-top:2px solid var(--accent);border-left:2px solid var(--accent)}
+.c-deco.tr{top:0;right:0;border-top:2px solid var(--accent);border-right:2px solid var(--accent)}
+.c-deco.bl{bottom:0;left:0;border-bottom:2px solid var(--accent);border-left:2px solid var(--accent)}
+.c-deco.br{bottom:0;right:0;border-bottom:2px solid var(--accent);border-right:2px solid var(--accent)}
+.term-header { background:var(--surface2); padding:10px 16px; display:flex; align-items:center; gap:8px; border-bottom:1px solid var(--border); }
+.t-dot{width:8px;height:8px;border-radius:50%}
+.t-r{background:var(--accent4);box-shadow:0 0 6px var(--accent4)} .t-y{background:#ffa502;box-shadow:0 0 6px #ffa502} .t-g{background:#2ed573;box-shadow:0 0 6px #2ed573}
+.term-title { font-family:'Share Tech Mono',monospace; font-size:9px; color:var(--muted); letter-spacing:2px; margin-left:8px; }
+.term-body { padding:24px 20px; }
+.tl { font-family:'Share Tech Mono',monospace; font-size:11px; line-height:2.2; color:#4a4070; }
+.tl .kw{color:var(--accent2)} .tl .fn{color:var(--accent)} .tl .str{color:var(--accent3)} .tl .num{color:#ffa502} .tl .cm{color:#3a3460;font-style:italic} .tl .ok{color:#2ed573} .tl .pr{color:var(--accent4);margin-right:6px}
+.t-cur { display:inline-block; width:8px; height:13px; background:var(--accent3); animation:blink 1s step-end infinite; vertical-align:middle; }
+
+/* TICKER */
+.ticker { background:var(--surface2); border-top:1px solid var(--accent2); border-bottom:1px solid var(--accent2); padding:10px 0; overflow:hidden; white-space:nowrap; box-shadow:0 0 20px rgba(123,47,255,0.15); position:relative; z-index:2; }
+.ticker-inner { display:inline-flex; animation:tickerAnim 28s linear infinite; }
+.ticker-item { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase; padding:0 28px; color:var(--muted); }
+.t-sep { color:var(--accent); padding:0 4px; }
+@keyframes tickerAnim { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* SECTION COMMON */
+.sec-label { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:4px; text-transform:uppercase; color:var(--accent3); margin-bottom:8px; display:flex; align-items:center; gap:10px; }
+.sec-label::before { content:'//'; color:var(--accent2); }
+.sec-num { font-family:'Orbitron',monospace; font-weight:900; font-size:90px; color:rgba(100,60,180,0.06); line-height:1; user-select:none; }
+
+/* ABOUT */
+#about { padding:120px 48px; display:grid; grid-template-columns:260px 1fr; gap:80px; max-width:1200px; margin:0 auto; position:relative; z-index:1; }
+.about-text h2 { font-family:'Orbitron',monospace; font-weight:700; font-size:30px; letter-spacing:-0.5px; line-height:1.25; margin-bottom:28px; text-shadow:0 0 30px var(--glow); }
+.about-text h2 span{color:var(--accent3)}
+.about-text p { font-size:15px; line-height:1.9; color:#7a6fa0; margin-bottom:16px; font-weight:300; }
+.about-text p strong{color:var(--accent);font-weight:600}
+.stats-row { display:flex; gap:0; margin-top:48px; border:1px solid var(--border); box-shadow:0 0 30px rgba(123,47,255,0.08); }
+.stat-item { flex:1; padding:24px 16px; border-right:1px solid var(--border); text-align:center; position:relative; overflow:hidden; transition:background 0.2s; }
+.stat-item:last-child{border-right:none}
+.stat-item:hover{background:var(--surface2)}
+.stat-item::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--accent2),var(--accent3)); transform:scaleX(0); transition:transform 0.3s; }
+.stat-item:hover::before{transform:scaleX(1)}
+.stat-num { font-family:'Orbitron',monospace; font-weight:900; font-size:28px; color:var(--accent); text-shadow:0 0 20px var(--glow); }
+.stat-label { font-family:'Share Tech Mono',monospace; font-size:8px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-top:6px; }
+
+/* SKILLS */
+#skills { padding:60px 48px 120px; max-width:1200px; margin:0 auto; position:relative; z-index:1; }
+.skills-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:48px; }
+.skills-header h2 { font-family:'Orbitron',monospace; font-weight:700; font-size:36px; letter-spacing:-1px; text-shadow:0 0 30px var(--glow); }
+.skills-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); }
+.skill-card { background:var(--surface); padding:32px 28px; position:relative; overflow:hidden; transition:background 0.25s; cursor:none; }
+.skill-card:hover{background:var(--surface2)}
+.skill-card::after { content:''; position:absolute; top:0; left:-100%; width:100%; height:1px; background:linear-gradient(90deg,transparent,var(--accent),transparent); transition:left 0.4s ease; }
+.skill-card:hover::after{left:100%}
+.skill-icon{font-size:22px;margin-bottom:16px}
+.skill-name { font-family:'Orbitron',monospace; font-weight:700; font-size:12px; margin-bottom:10px; letter-spacing:1px; color:var(--text); }
+.skill-desc{font-size:13px;line-height:1.7;color:#5a4f80;font-weight:300}
+.skill-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.tag { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; padding:3px 8px; background:rgba(123,47,255,0.08); border:1px solid rgba(123,47,255,0.2); color:var(--accent2); transition:all 0.2s; }
+.skill-card:hover .tag{border-color:rgba(180,79,255,0.35);color:var(--accent)}
+
+/* PROJECTS */
+#projects { padding:60px 48px 120px; background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); position:relative; z-index:1; }
+.projects-inner{max-width:1200px;margin:0 auto}
+.projects-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:48px; }
+.projects-header h2 { font-family:'Orbitron',monospace; font-weight:700; font-size:36px; letter-spacing:-1px; text-shadow:0 0 30px var(--glow); }
+.projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
+.project-card { background:var(--surface); padding:40px 36px; position:relative; overflow:hidden; transition:background 0.3s; cursor:none; }
+.project-card:hover{background:var(--surface2)}
+.project-card:hover .project-arrow{transform:translate(3px,-3px);color:var(--accent)}
+.project-num{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--muted);margin-bottom:24px}
+.project-title { font-family:'Orbitron',monospace; font-weight:700; font-size:16px; line-height:1.3; margin-bottom:14px; color:var(--text); }
+.project-desc{font-size:13px;line-height:1.9;color:#5a4f80;margin-bottom:24px;font-weight:300}
+.project-stack{display:flex;flex-wrap:wrap;gap:6px}
+.project-tag { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; padding:3px 8px; background:rgba(0,245,255,0.05); border:1px solid rgba(0,245,255,0.13); color:var(--accent3); }
+.project-arrow{position:absolute;top:36px;right:36px;font-size:18px;color:var(--muted);transition:transform 0.2s,color 0.2s}
+.project-card.featured { grid-column:span 2; background:var(--surface2); display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; border:1px solid rgba(180,79,255,0.18); box-shadow:0 0 60px rgba(123,47,255,0.1),inset 0 0 60px rgba(123,47,255,0.02); }
+.project-card.featured::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--accent2),var(--accent),var(--accent3)); }
+.feat-badge { font-family:'Share Tech Mono',monospace; font-size:8px; letter-spacing:3px; text-transform:uppercase; color:#000; background:var(--accent); padding:3px 10px; display:inline-block; margin-bottom:20px; box-shadow:0 0 15px var(--glow); }
+
+/* CONTACT */
+#contact { padding:120px 48px; max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; position:relative; z-index:1; }
+.contact-left h2 { font-family:'Orbitron',monospace; font-weight:900; font-size:42px; letter-spacing:-1.5px; line-height:1.0; margin-bottom:24px; text-shadow:0 0 40px var(--glow); }
+.contact-left h2 span{color:var(--accent3)}
+.contact-left p{font-size:14px;line-height:1.9;color:#7a6fa0;margin-bottom:40px;font-weight:300}
+.contact-links{display:flex;flex-direction:column}
+.contact-link { display:flex; align-items:center; gap:16px; text-decoration:none; color:var(--text); font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:1px; padding:16px 0; border-bottom:1px solid var(--border); transition:all 0.2s; position:relative; }
+.contact-link::after { content:''; position:absolute; bottom:0; left:0; width:0; height:1px; background:var(--accent3); transition:width 0.3s; }
+.contact-link:hover{color:var(--accent3);padding-left:10px}
+.contact-link:hover::after{width:100%}
+.cl-icon { width:32px; height:32px; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:12px; color:var(--accent2); flex-shrink:0; transition:all 0.2s; }
+.contact-link:hover .cl-icon{border-color:var(--accent3);color:var(--accent3);box-shadow:0 0 10px var(--glow2)}
+.contact-right { background:var(--surface); border:1px solid var(--border); padding:40px; position:relative; box-shadow:0 0 40px rgba(123,47,255,0.06); }
+.contact-right::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--accent2),var(--accent3)); }
+.contact-right h3{font-family:'Orbitron',monospace;font-size:15px;font-weight:700;margin-bottom:28px;letter-spacing:2px}
+.form-group{margin-bottom:20px}
+.form-group label { display:block; font-family:'Share Tech Mono',monospace; font-size:8px; letter-spacing:3px; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+.form-group input,.form-group textarea { width:100%; background:var(--bg); border:1px solid var(--border); color:var(--text); font-family:'Share Tech Mono',monospace; font-size:11px; padding:12px 14px; outline:none; resize:none; cursor:none; transition:border-color 0.2s,box-shadow 0.2s; }
+.form-group input:focus,.form-group textarea:focus{border-color:var(--accent2);box-shadow:0 0 15px rgba(123,47,255,0.18)}
+.form-submit { width:100%; padding:14px; font-family:'Share Tech Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; background:transparent; color:var(--accent); border:1px solid var(--accent); cursor:none; position:relative; overflow:hidden; transition:color 0.3s; box-shadow:0 0 20px rgba(180,79,255,0.12); }
+.form-submit::before{content:'';position:absolute;inset:0;background:var(--accent);transform:translateY(101%);transition:transform 0.3s ease;z-index:-1}
+.form-submit:hover{color:#000}.form-submit:hover::before{transform:translateY(0)}
+
+/* FOOTER */
+footer { border-top:1px solid var(--border); padding:32px 48px; display:flex; justify-content:space-between; align-items:center; position:relative; z-index:1; background:var(--bg2); }
+.footer-logo{font-family:'Orbitron',monospace;font-weight:900;font-size:14px;color:var(--accent);letter-spacing:3px;text-shadow:0 0 15px var(--glow)}
+footer p{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px}
+
+/* ANIM */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.reveal{opacity:0;transform:translateY(32px);transition:opacity 0.8s ease,transform 0.8s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  body, body * { cursor: auto !important; }
+  .cursor, .cursor-ring, .crosshair-h, .crosshair-v { display:none !important; }
+  nav{padding:16px 24px}.nav-links{display:none}
+  #hero{grid-template-columns:1fr}.hero-left{padding:100px 24px 60px}.hero-right{display:none}
+  #about{grid-template-columns:1fr;padding:80px 24px;gap:24px}
+  #skills{padding:60px 24px}.skills-grid{grid-template-columns:1fr}
+  #projects{padding:60px 24px}.projects-grid{grid-template-columns:1fr}
+  .project-card.featured{grid-column:span 1;grid-template-columns:1fr}
+  #contact{grid-template-columns:1fr;padding:80px 24px}
+  footer{flex-direction:column;gap:12px;padding:24px;text-align:center}
+  #education{padding:60px 24px !important}
+  #education > div:nth-child(2) { grid-template-columns: 1fr !important; }
+}
+@media(max-width:1100px) and (min-width:901px){
+  .terminal-card { max-width: 280px; }
+  .term-body { padding: 18px 14px; }
+  .tl { font-size: 10px; line-height: 2; }
+}
+
+/* Form input hover */
+.form-group input:hover, .form-group textarea:hover {
+  border-color: rgba(123,47,255,0.4);
+}
+</style>
+</head>
+<body>
+
+<div id="scrollProgress"></div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="crosshair-h" id="crossH"></div>
+<div class="crosshair-v" id="crossV"></div>
+
+<div class="status-bar">SYS::ONLINE // v2.026</div>
+
+<nav>
+  <div class="nav-logo">PM<span>_</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-corner hc-tl">LAT:22.3072 // LON:73.1812</div>
+  <div class="hero-corner hc-tr">GUJARAT, INDIA</div>
+  <div class="hero-corner hc-bl">STATUS: AVAILABLE</div>
+  <div class="hero-corner hc-br">EXP: 8Y // ROLE: SWE</div>
+
+  <div class="hero-left">
+    <div class="hero-tag"><span class="blink">&#x25AE;</span> Available for opportunities</div>
+    <h1 class="hero-name"><span class="glitch" data-text="PARTH">PARTH</span></h1>
+    <div class="hero-name-sub">MISTRY</div>
+    <p class="hero-desc" id="heroDesc">
+      Software Engineer &mdash; 8 years at VarChar Solutions. Currently Team Lead, building enterprise contact center platforms, healthcare CRM, and AI-powered automation.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn-primary">VIEW_WORK</a>
+      <a href="#contact" class="btn-outline">INIT_CONTACT</a>
+      <a href="resume.pdf" download class="btn-outline" style="border-color:rgba(180,79,255,0.4);color:var(--accent)">&#x2193; RESUME</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hex-bg">
+      <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="hex" width="60" height="52" patternUnits="userSpaceOnUse">
+            <polygon points="30,2 58,17 58,35 30,50 2,35 2,17" fill="none" stroke="rgba(123,47,255,0.5)" stroke-width="0.5"/>
+          </pattern>
+        </defs>
+        <rect width="600" height="600" fill="url(#hex)"/>
+      </svg>
+    </div>
+    <div class="terminal-card">
+      <div class="c-deco tl"></div><div class="c-deco tr"></div>
+      <div class="c-deco bl"></div><div class="c-deco br"></div>
+      <div class="term-header">
+        <div class="t-dot t-r"></div>
+        <div class="t-dot t-y"></div>
+        <div class="t-dot t-g"></div>
+        <span class="term-title">PROFILE.EXE</span>
+      </div>
+      <div class="term-body">
+        <div class="tl"><span class="pr">></span><span class="kw">const</span> <span class="fn">engineer</span> = {</div>
+        <div class="tl">&nbsp;&nbsp;name: <span class="str">"Parth Mistry"</span>,</div>
+        <div class="tl">&nbsp;&nbsp;exp: <span class="num">8</span>, <span class="cm">// years</span></div>
+        <div class="tl">&nbsp;&nbsp;role: <span class="str">"Team Lead"</span>,</div>
+        <div class="tl">&nbsp;&nbsp;company: <span class="str">"VarChar Solutions"</span>,</div>
+        <div class="tl">&nbsp;&nbsp;stack: <span class="str">".NET / React / SQL"</span>,</div>
+        <div class="tl">&nbsp;&nbsp;location: <span class="str">"Gujarat, IN"</span>,</div>
+        <div class="tl">&nbsp;&nbsp;status: <span class="ok">"available"</span></div>
+        <div class="tl">};</div>
+        <div class="tl" style="margin-top:12px"><span class="pr">></span><span class="cm">// compiling... &#x2713;</span></div>
+        <div class="tl"><span class="pr">></span><span class="t-cur"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">.NET / C#</span><span class="t-sep">&#x25C8;</span>
+    <span class="ticker-item">React</span><span class="t-sep">&#x25C8;</span>
+    <span class="ticker-item">SQL Server</span><span class="t-sep">&#x25C8;</span>
+    <span class="ticker-item">Elasticsearch</span><span class="t-sep">&#x25C8;</span>
+    <span class="ticker-item">Node.js</span><span class="t-sep">&#x25C8;</span>
+    <span class="ticker-item">SOC 2</span><span class="t-sep">&#x25C8;</span>
+    <span class="ticker-item">HIPAA</span><span class="t-sep">&#x25C8;</span>
+    <span class="ticker-item">PCI DSS</span><span class="t-sep">&#x25C8;</span>
+    <span class="ticker-item">Twilio</span><span class="t-sep">&#x25C8;</span>
+    <span class="ticker-item">NLP / AI</span><span class="t-sep">&#x25C8;</span>
+    <span class="ticker-item">REST APIs</span><span class="t-sep">&#x25C8;</span>
+    <span class="ticker-item">Healthcare IT</span><span class="t-sep">&#x25C8;</span>
+    <span class="ticker-item">SaaS</span><span class="t-sep">&#x25C8;</span>
+    <span class="ticker-item">.NET / C#</span><span class="t-sep">&#x25C8;</span>
+    <span class="ticker-item">React</span><span class="t-sep">&#x25C8;</span>
+    <span class="ticker-item">SQL Server</span><span class="t-sep">&#x25C8;</span>
+    <span class="ticker-item">Elasticsearch</span><span class="t-sep">&#x25C8;</span>
+    <span class="ticker-item">Node.js</span><span class="t-sep">&#x25C8;</span>
+    <span class="ticker-item">SOC 2</span><span class="t-sep">&#x25C8;</span>
+    <span class="ticker-item">HIPAA</span><span class="t-sep">&#x25C8;</span>
+    <span class="ticker-item">PCI DSS</span><span class="t-sep">&#x25C8;</span>
+    <span class="ticker-item">Twilio</span><span class="t-sep">&#x25C8;</span>
+    <span class="ticker-item">NLP / AI</span><span class="t-sep">&#x25C8;</span>
+    <span class="ticker-item">REST APIs</span><span class="t-sep">&#x25C8;</span>
+    <span class="ticker-item">Healthcare IT</span><span class="t-sep">&#x25C8;</span>
+    <span class="ticker-item">SaaS</span><span class="t-sep">&#x25C8;</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="reveal">
+    <div class="sec-label">About</div>
+    <div class="sec-num">01</div>
+  </div>
+  <div class="about-text reveal">
+    <h2>8 years building enterprise<br><span>contact center tech.</span></h2>
+    <p>Senior Software Engineer with 8 years of experience at <strong>VarChar Solutions Pvt. Ltd.</strong>, the majority spent building <strong>Proponisi</strong> &mdash; a contact center performance platform powering AI-driven quality assurance, real-time agent coaching, gamification, and LMS for Fortune-level enterprises. Currently serving as Team Lead. SOC 2, HIPAA, PCI DSS 4.0.1, and NIST 800-53 certified.</p>
+    <p>Also delivered BioLogistic Solutions CRM &mdash; a healthcare platform with telemedicine, e-prescribe, and telephony integrations connecting pharmacies, labs, doctors, and patients.</p>
+    <div class="stats-row">
+      <div class="stat-item"><div class="stat-num" id="stat1" data-target="8">0</div><div class="stat-label">Years exp</div></div>
+      <div class="stat-item"><div class="stat-num" id="stat2" data-target="4">0</div><div class="stat-label">Compliance certs</div></div>
+      <div class="stat-item"><div class="stat-num" id="stat3" data-target="100">0</div><div class="stat-label">QA coverage</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="skills-header reveal">
+    <div><div class="sec-label">What I Do</div><h2>Core Skills</h2></div>
+    <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:3px">02 // 04</div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-icon">&#x2699;</div>
+      <div class="skill-name">Backend Engineering</div>
+      <div class="skill-desc">REST APIs, MVC architecture, business logic layers, multi-tenant SaaS systems.</div>
+      <div class="skill-tags"><span class="tag">.NET / C#</span><span class="tag">Node.js</span><span class="tag">Python</span><span class="tag">MVC</span><span class="tag">React</span></div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">🏥</div>
+      <div class="skill-name">Healthcare Tech</div>
+      <div class="skill-desc">CRM systems connecting pharmacies, labs, doctors, patients. E-scribe, telemedicine, compliance.</div>
+      <div class="skill-tags"><span class="tag">HIPAA</span><span class="tag">HL7</span><span class="tag">e-Prescribe</span><span class="tag">CRM</span></div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">&#x25C8;</div>
+      <div class="skill-name">AI / NLP Integration</div>
+      <div class="skill-desc">AI quality assurance, sentiment analysis, real-time agent assist, automated coaching pipelines.</div>
+      <div class="skill-tags"><span class="tag">NLP</span><span class="tag">Auto-QA</span><span class="tag">LLM APIs</span><span class="tag">Analytics</span></div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">🗄</div>
+      <div class="skill-name">Database &amp; Storage</div>
+      <div class="skill-desc">Schema design, query optimization, relational data modelling for complex multi-stakeholder systems.</div>
+      <div class="skill-tags"><span class="tag">SQL Server</span><span class="tag">PostgreSQL</span><span class="tag">Entity Framework</span><span class="tag">Elasticsearch</span></div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">📡</div>
+      <div class="skill-name">Telephony &amp; Messaging</div>
+      <div class="skill-desc">Caller ID routing, SMS broadcasting, fax systems, telephone switch integration.</div>
+      <div class="skill-tags"><span class="tag">Twilio</span><span class="tag">VoIP</span><span class="tag">SMS</span><span class="tag">Fax APIs</span></div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">🔐</div>
+      <div class="skill-name">Compliance &amp; Security</div>
+      <div class="skill-desc">Enterprise-grade security across regulated healthcare and financial verticals.</div>
+      <div class="skill-tags"><span class="tag">SOC 2</span><span class="tag">HIPAA</span><span class="tag">PCI DSS</span><span class="tag">NIST</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="projects-inner">
+    <div class="projects-header reveal">
+      <div><div class="sec-label">Selected Work</div><h2>Projects</h2></div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:3px">03 // 04</div>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card featured reveal">
+        <div>
+          <div class="feat-badge">FEATURED</div>
+          <div class="project-title">Proponisi &mdash; Contact Center Performance Platform</div>
+          <div class="project-desc">Enterprise SaaS platform &mdash; AI-powered quality assurance, real-time agent assist, automated coaching, gamification, and LMS. Covers 100% QA of all interactions. Deployed across healthcare, fintech, and tolling sectors. SOC 2, HIPAA, PCI DSS 4.0.1, and NIST 800-53 compliant.</div>
+          <a href="https://tpcdm.com" target="_blank" style="display:inline-block;font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--accent3);margin-top:16px;letter-spacing:2px;text-decoration:none;border-bottom:1px solid rgba(0,245,255,0.3);padding-bottom:2px">tpcdm.com &#x2197;</a>
+        </div>
+        <div>
+          <div class="project-stack">
+            <span class="project-tag">AI / ML</span><span class="project-tag">Real-time</span><span class="project-tag">SaaS</span><span class="project-tag">Enterprise</span><span class="project-tag">Analytics</span><span class="project-tag">.NET</span>
+          </div>
+        </div>
+      </div>
+
+      <a href="https://crm.biologisticsolutions.com/Home/About" target="_blank" class="project-card reveal" style="text-decoration:none;color:inherit;display:block;">
+        <div class="project-num">// 01</div>
+        <div class="project-title">BioLogistic Solutions CRM</div>
+        <div class="project-desc">Healthcare CRM connecting pharmacies, labs, doctors, and patients. Includes telemedicine, mail-order prescriptions, e-scribe, SMS messaging, and fax broadcasting.</div>
+        <div class="project-stack"><span class="project-tag">.NET / MVC</span><span class="project-tag">CRM</span><span class="project-tag">Healthcare</span><span class="project-tag">Telephony</span></div>
+        <div class="project-arrow">&#x2197;</div>
+      </a>
+
+      <div class="project-card reveal">
+        <div class="project-num">// 02</div>
+        <div class="project-title">AI Quality Assurance Engine</div>
+        <div class="project-desc">Auto-QA pipeline within Proponisi reviewing 100% of contact center interactions for compliance, sentiment, and coaching opportunities &mdash; replacing manual spot-check sampling.</div>
+        <div class="project-stack"><span class="project-tag">NLP</span><span class="project-tag">Python</span><span class="project-tag">Compliance</span><span class="project-tag">Real-time</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CURRENT FOCUS -->
+<section style="padding:60px 48px;max-width:1200px;margin:0 auto;position:relative;z-index:1;">
+  <div style="background:var(--surface);border:1px solid var(--border);padding:32px 36px;position:relative;display:grid;grid-template-columns:auto 1fr auto;gap:32px;align-items:center;box-shadow:0 0 30px rgba(123,47,255,0.06)">
+    <div style="position:absolute;top:0;left:0;height:100%;width:3px;background:linear-gradient(180deg,var(--accent3),var(--accent))"></div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="width:10px;height:10px;border-radius:50%;background:#2ed573;box-shadow:0 0 12px #2ed573;animation:blink 1.5s ease-in-out infinite"></div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--accent3);text-transform:uppercase">Now Building</div>
+    </div>
+    <div>
+      <div style="font-family:'Orbitron',monospace;font-weight:700;font-size:14px;color:var(--text);margin-bottom:4px">Leading Proponisi platform engineering</div>
+      <div style="font-size:13px;color:#7a6fa0;font-weight:300">Scaling AI-driven QA, real-time agent assist, and compliance automation as Team Lead at VarChar Solutions.</div>
+    </div>
+    <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px">2026 &#x25C8; ACTIVE</div>
+  </div>
+</section>
+
+<!-- EDUCATION & EXPERIENCE -->
+<section id="education" style="padding:60px 48px 120px;max-width:1200px;margin:0 auto;position:relative;z-index:1;">
+  <div class="skills-header reveal">
+    <div><div class="sec-label">Background</div><h2>Education &amp; Experience</h2></div>
+    <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:3px">04 // 05</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)">
+
+    <!-- Experience -->
+    <div style="background:var(--surface);padding:40px 36px;position:relative;">
+      <div style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--muted);margin-bottom:28px">// EXPERIENCE</div>
+      <div style="display:flex;flex-direction:column;gap:0;">
+
+        <div class="reveal" style="border-left:1px solid var(--border);padding-left:24px;padding-bottom:36px;position:relative;">
+          <div style="position:absolute;left:-5px;top:4px;width:9px;height:9px;border:1px solid var(--accent);background:var(--accent);box-shadow:0 0 10px var(--glow);"></div>
+          <div style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--accent3);margin-bottom:6px">JUL 2025 &mdash; PRESENT</div>
+          <div style="font-family:'Orbitron',monospace;font-weight:700;font-size:13px;color:var(--text);margin-bottom:4px">Team Lead</div>
+          <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:6px">VarChar Solutions Pvt. Ltd.</div>
+          <div style="font-size:12px;color:#5a4f80;font-weight:300">Vadodara, Gujarat &middot; On-site</div>
+        </div>
+
+        <div class="reveal" style="border-left:1px solid var(--border);padding-left:24px;padding-bottom:36px;position:relative;">
+          <div style="position:absolute;left:-5px;top:4px;width:9px;height:9px;border:1px solid var(--accent2);background:var(--accent2);box-shadow:0 0 10px var(--glow);"></div>
+          <div style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--accent3);margin-bottom:6px">JUL 2023 &mdash; JUN 2025 &middot; 2 YRS</div>
+          <div style="font-family:'Orbitron',monospace;font-weight:700;font-size:13px;color:var(--text);margin-bottom:4px">Senior Software Engineer</div>
+          <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:6px">VarChar Solutions Pvt. Ltd.</div>
+          <div style="font-size:12px;color:#5a4f80;font-weight:300">IBM Watson &middot; Twilio &middot; +21 skills</div>
+        </div>
+
+        <div class="reveal" style="border-left:1px solid var(--border);padding-left:24px;padding-bottom:0;position:relative;">
+          <div style="position:absolute;left:-5px;top:4px;width:9px;height:9px;border:1px solid var(--muted);background:var(--muted);"></div>
+          <div style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--accent3);margin-bottom:6px">JUL 2018 &mdash; JUN 2023 &middot; 5 YRS</div>
+          <div style="font-family:'Orbitron',monospace;font-weight:700;font-size:13px;color:var(--text);margin-bottom:4px">Software Engineer</div>
+          <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:6px">VarChar Solutions Pvt. Ltd.</div>
+          <div style="font-size:12px;color:#5a4f80;font-weight:300">jQuery &middot; Web Development &middot; +12 skills</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Education + Cert -->
+    <div style="background:var(--surface);padding:40px 36px;display:flex;flex-direction:column;gap:0;">
+      <div style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--muted);margin-bottom:28px">// EDUCATION</div>
+
+      <div class="reveal" style="padding-bottom:28px;border-bottom:1px solid var(--border);margin-bottom:28px;position:relative;">
+        <div style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--accent3);margin-bottom:8px">2015 &mdash; 2018</div>
+        <div style="font-family:'Orbitron',monospace;font-weight:700;font-size:13px;color:var(--text);margin-bottom:4px;line-height:1.4">B.E. Computer Engineering</div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:6px">Sigma Institute of Engg., Bakrol</div>
+        <div style="display:inline-block;font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;padding:3px 8px;background:rgba(123,47,255,0.08);border:1px solid rgba(123,47,255,0.2);color:var(--accent2)">Bachelor of Engineering</div>
+      </div>
+
+      <div class="reveal" style="padding-bottom:28px;border-bottom:1px solid var(--border);margin-bottom:28px;">
+        <div style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--accent3);margin-bottom:8px">2010 &mdash; 2015</div>
+        <div style="font-family:'Orbitron',monospace;font-weight:700;font-size:13px;color:var(--text);margin-bottom:4px">Diploma, Computer Engineering</div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:6px">Parul Polytechnic Institute</div>
+        <div style="display:inline-block;font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;padding:3px 8px;background:rgba(123,47,255,0.08);border:1px solid rgba(123,47,255,0.2);color:var(--accent2)">Diploma</div>
+      </div>
+
+      <div class="reveal">
+        <div style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--muted);margin-bottom:20px">// CERTIFICATION</div>
+        <div style="display:flex;align-items:center;gap:16px;">
+          <div style="width:40px;height:40px;background:#1d2b1f;border:1px solid #2ed573;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-weight:900;font-size:12px;color:#2ed573;flex-shrink:0;box-shadow:0 0 10px rgba(46,213,115,0.2)">HR</div>
+          <div>
+            <div style="font-family:'Orbitron',monospace;font-weight:700;font-size:12px;color:var(--text);margin-bottom:2px">SQL (Advanced) Certificate</div>
+            <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--accent3)">HackerRank &middot; Issued Apr 2023</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact">
+  <div class="contact-left reveal">
+    <div class="sec-label">05 // 05</div>
+    <h2>Let's build<br>something<br><span>worth building.</span></h2>
+    <p>Open to senior roles, contract work, and interesting problems. If you're solving something hard, I want to hear about it.</p>
+    <div class="contact-links">
+      <a href="mailto:parthmistry1072@gmail.com" class="contact-link"><span class="cl-icon">&#x2709;</span>parthmistry1072@gmail.com</a>
+      <a href="https://www.linkedin.com/in/parth-mistry-9a84899b" class="contact-link" target="_blank"><span class="cl-icon">in</span>linkedin.com/in/parth-mistry-9a84899b</a>
+      <a href="https://github.com/parthmistry1072-dev" class="contact-link" target="_blank"><span class="cl-icon">gh</span>github.com/parthmistry1072-dev</a>
+    </div>
+  </div>
+  <div class="contact-right reveal">
+    <h3>SEND_MESSAGE</h3>
+    <div class="form-group"><label>Your Name</label><input type="text" id="fName" placeholder="John Doe"></div>
+    <div class="form-group"><label>Email</label><input type="email" id="fEmail" placeholder="john@company.com"></div>
+    <div class="form-group"><label>Message</label><textarea id="fMsg" rows="4" placeholder="Tell me about the problem you're solving..."></textarea></div>
+    <button class="form-submit" id="formSubmitBtn">TRANSMIT &#x2192;</button>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">PARTH MISTRY</div>
+  <p>DESIGNED &amp; BUILT &mdash; 2026</p>
+  <p>GUJARAT, INDIA</p>
+</footer>
+
+<script>
+  // ── CURSOR ──
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  const crossH = document.getElementById('crossH');
+  const crossV = document.getElementById('crossV');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove', e => {
+    mx=e.clientX; my=e.clientY;
+    cursor.style.left=mx-3+'px'; cursor.style.top=my-3+'px';
+    crossH.style.top=my+'px'; crossV.style.left=mx+'px';
+  });
+  function animRing(){
+    rx+=(mx-rx-14)*0.1; ry+=(my-ry-14)*0.1;
+    ring.style.left=rx+'px'; ring.style.top=ry+'px';
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+  document.querySelectorAll('a,button,.skill-card,.project-card').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{cursor.style.transform='scale(3)';ring.style.transform='scale(1.8)'});
+    el.addEventListener('mouseleave',()=>{cursor.style.transform='scale(1)';ring.style.transform='scale(1)'});
+  });
+
+  // ── SCROLL PROGRESS BAR ──
+  const progressBar = document.getElementById('scrollProgress');
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = pct + '%';
+  });
+
+  // ── TYPING EFFECT ──
+  const heroDesc = document.getElementById('heroDesc');
+  const fullText = 'Software Engineer — 8 years at VarChar Solutions. Currently Team Lead, building enterprise contact center platforms, healthcare CRM, and AI-powered automation.';
+  let charIndex = 0;
+  let typingStarted = false;
+
+  function typeText() {
+    if (charIndex < fullText.length) {
+      heroDesc.textContent += fullText[charIndex];
+      charIndex++;
+      setTimeout(typeText, 28);
+    }
+  }
+
+  // Start typing after hero animation delay
+  setTimeout(() => {
+    heroDesc.textContent = '';
+    typeText();
+    typingStarted = true;
+  }, 1200);
+
+  // ── COUNTER ANIMATION ──
+  function animateCounter(el, target, suffix, duration) {
+    let start = 0;
+    const step = Math.ceil(target / (duration / 16));
+    const timer = setInterval(() => {
+      start = Math.min(start + step, target);
+      el.textContent = start + suffix;
+      if (start >= target) clearInterval(timer);
+    }, 16);
+  }
+
+  const statsObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const s1 = document.getElementById('stat1');
+        const s2 = document.getElementById('stat2');
+        const s3 = document.getElementById('stat3');
+        if (s1 && !s1.dataset.animated) {
+          s1.dataset.animated = true;
+          animateCounter(s1, 8, '+', 1200);
+          animateCounter(s2, 4, '', 1000);
+          animateCounter(s3, 100, '%', 1500);
+        }
+        statsObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.5 });
+
+  const statsRow = document.querySelector('.stats-row');
+  if (statsRow) statsObserver.observe(statsRow);
+
+  // ── SCROLL REVEAL ──
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach((e,i)=>{ if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*80);obs.unobserve(e.target);} });
+  },{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+  // ── FORM → GMAIL COMPOSE ──
+  const submitBtn = document.getElementById('formSubmitBtn');
+  if (submitBtn) {
+    submitBtn.addEventListener('click', () => {
+      const name = document.getElementById('fName').value.trim();
+      const email = document.getElementById('fEmail').value.trim();
+      const msg = document.getElementById('fMsg').value.trim();
+      const subject = encodeURIComponent(name ? `Portfolio inquiry from ${name}` : 'Portfolio inquiry');
+      const body = encodeURIComponent(`${msg}\n\n— ${name}\n${email}`);
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=parthmistry1072@gmail.com&su=${subject}&body=${body}`;
+      window.open(gmailUrl, '_blank');
+      submitBtn.textContent = 'OPENING GMAIL ✓';
+      submitBtn.style.background = 'var(--accent)';
+      submitBtn.style.color = '#000';
+      setTimeout(() => {
+        submitBtn.textContent = 'TRANSMIT →';
+        submitBtn.style.background = 'transparent';
+        submitBtn.style.color = 'var(--accent)';
+      }, 2500);
+    });
+  }
+</script>
+</body>
+</html>
