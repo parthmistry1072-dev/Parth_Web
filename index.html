@@ -4,6 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Parth Mistry — Software Engineer</title>
+<meta name="description" content="Parth Mistry is a Senior Software Engineer and Team Lead with 8+ years building enterprise contact center, healthcare, and AI platforms. SOC 2, HIPAA, and PCI DSS 4.0.1 certified.">
+<meta name="author" content="Parth Mistry">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://parthmistry.in">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://parthmistry.in">
+<meta property="og:title" content="Parth Mistry — Software Engineer">
+<meta property="og:description" content="Senior Software Engineer and Team Lead with 8+ years building enterprise contact center, healthcare, and AI platforms.">
+<meta property="og:image" content="https://parthmistry.in/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Parth Mistry — Software Engineer">
+<meta name="twitter:description" content="Senior Software Engineer and Team Lead with 8+ years building enterprise contact center, healthcare, and AI platforms.">
+<meta name="twitter:image" content="https://parthmistry.in/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Parth Mistry","jobTitle":"Senior Software Engineer","worksFor":{"@type":"Organization","name":"VarChar Solutions Pvt. Ltd."},"url":"https://parthmistry.in","email":"parthmistry1072@gmail.com","telephone":"+918460400591","address":{"@type":"PostalAddress","addressLocality":"Vadodara","addressRegion":"Gujarat","addressCountry":"IN"},"sameAs":["https://www.linkedin.com/in/parth-mistry-9a84899b","https://github.com/parthmistry1072-dev"]}</script>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect width='36' height='36' rx='9' fill='%230e0e10'/><text x='18' y='26' font-family='Inter,ui-sans-serif,sans-serif' font-size='22' font-weight='700' fill='%23ffffff' text-anchor='middle'>P</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,6 +57,10 @@
 }
 
 html{scroll-behavior:smooth}
+
+#scroll-bar{position:fixed;top:0;left:0;height:3px;width:0%;background:var(--accent);z-index:9999;pointer-events:none;transition:width .08s linear}
+
+.sb-avatar{width:72px;height:72px;border-radius:50%;background:var(--surface-2);border:2px solid var(--line);margin-bottom:20px;display:grid;place-items:center;font-size:24px;font-weight:700;color:var(--text-2);letter-spacing:-.02em;overflow:hidden;flex-shrink:0}
 
 ::view-transition-old(root){animation:.55s cubic-bezier(.4,0,.6,1) both vt-peel-out}
 ::view-transition-new(root){animation:.55s cubic-bezier(.4,0,.6,1) both vt-peel-in;filter:drop-shadow(-10px 0 16px rgba(0,0,0,.18))}
@@ -371,6 +389,8 @@ h2.section-title{
 </head>
 <body>
 
+<div id="scroll-bar"></div>
+
 <div class="mobile-nav">
   <div style="display:flex;align-items:center;gap:10px">
     <span class="sb-mark">P</span>
@@ -389,6 +409,8 @@ h2.section-title{
       <span class="sb-mark">P</span>
       <div class="sb-mark-text">Parth Mistry <small>Software Engineer</small></div>
     </div>
+
+    <div class="sb-avatar">P</div>
 
     <h1 class="sb-name">Parth Mistry</h1>
     <p class="sb-role">Software Engineer · Team Lead</p>
@@ -839,6 +861,13 @@ h2.section-title{
     document.addEventListener('mouseleave', () => dot.style.opacity = '0');
     document.addEventListener('mouseenter', () => dot.style.opacity = '1');
   }
+
+  // Scroll progress bar
+  const scrollBar = document.getElementById('scroll-bar');
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+    scrollBar.style.width = pct + '%';
+  }, { passive: true });
 </script>
 </body>
 </html>
