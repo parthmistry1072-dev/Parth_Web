@@ -44,10 +44,10 @@
 
 html{scroll-behavior:smooth}
 
-::view-transition-old(root){animation:.4s ease both vt-slide-out}
-::view-transition-new(root){animation:.4s ease both vt-slide-in}
-@keyframes vt-slide-out{from{transform:translateX(0)}to{transform:translateX(-30px);opacity:0}}
-@keyframes vt-slide-in{from{transform:translateX(30px);opacity:0}to{transform:translateX(0);opacity:1}}
+::view-transition-old(root){animation:.55s cubic-bezier(.4,0,.6,1) both vt-peel-out}
+::view-transition-new(root){animation:.55s cubic-bezier(.4,0,.6,1) both vt-peel-in;filter:drop-shadow(-10px 0 16px rgba(0,0,0,.18))}
+@keyframes vt-peel-out{0%{clip-path:polygon(0 0,100% 0,100% 100%,0 100%);opacity:1}100%{clip-path:polygon(100% 0,100% 0,100% 100%,100% 100%);opacity:.35}}
+@keyframes vt-peel-in{0%{clip-path:polygon(0 0,0 0,0 100%,0 100%)}100%{clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}}
 
 body{
   background:var(--bg);
