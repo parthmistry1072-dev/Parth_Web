@@ -4,17 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Parth Mistry — Software Engineer</title>
-<meta name="description" content="Parth Mistry — Senior Software Engineer & Team Lead with 8 years building enterprise contact center, healthcare, and AI platforms. .NET, React, SQL Server, Elasticsearch, LangChain. Based in Vadodara, India.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://parthmistry.in/">
-<meta property="og:title" content="Parth Mistry — Software Engineer">
-<meta property="og:description" content="Senior Software Engineer & Team Lead with 8 years building enterprise contact center, healthcare, and AI platforms. SOC 2, HIPAA, PCI DSS 4.0.1 certified.">
-<meta property="og:image" content="https://parthmistry.in/og.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Parth Mistry — Software Engineer">
-<meta name="twitter:description" content="Senior Software Engineer & Team Lead with 8 years building enterprise contact center, healthcare, and AI platforms.">
-<meta name="twitter:image" content="https://parthmistry.in/og.png">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect width='36' height='36' rx='9' fill='%230e0e10'/><text x='18' y='26' font-family='Inter,sans-serif' font-size='20' font-weight='700' fill='%23fbfaf8' text-anchor='middle'>P</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;450;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -31,8 +20,9 @@
   --text:#0e0e10;
   --text-2:#4d4f55;
   --text-3:#84878d;
-  --accent:#0e0e10;
-  --accent-soft:rgba(14,14,16,.05);
+  --accent:#5B47F5;
+  --accent-soft:rgba(91,71,245,.08);
+  --accent-text:#ffffff;
   --good:#1a7f4d;
 }
 [data-theme="dark"]{
@@ -45,8 +35,9 @@
   --text:#ededee;
   --text-2:#a0a3a8;
   --text-3:#6a6d74;
-  --accent:#ededee;
-  --accent-soft:rgba(237,237,238,.06);
+  --accent:#7B6AF7;
+  --accent-soft:rgba(123,106,247,.1);
+  --accent-text:#ffffff;
   --good:#3ecf8e;
 }
 
@@ -107,8 +98,8 @@ aside.sidebar{position:sticky;top:64px;align-self:start;height:calc(100vh - 128p
 }
 .sb-nav a .num{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-3);font-weight:400}
 .sb-nav a:hover{color:var(--text);padding-left:4px}
-.sb-nav a.active{color:var(--text);font-weight:500}
-.sb-nav a.active::before{content:'→';display:inline-block;margin-right:6px;color:var(--text)}
+.sb-nav a.active{color:var(--accent);font-weight:500}
+.sb-nav a.active::before{content:'→';display:inline-block;margin-right:6px;color:var(--accent)}
 
 .sb-bottom{margin-top:auto;padding-top:32px;border-top:1px solid var(--line)}
 .sb-actions{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap}
@@ -120,8 +111,8 @@ aside.sidebar{position:sticky;top:64px;align-self:start;height:calc(100vh - 128p
   transition:all .15s;font-family:inherit;
 }
 .sb-actions a:hover, .sb-actions button:hover{border-color:var(--line-2);background:var(--surface-2)}
-.sb-actions a.primary{background:var(--text);color:var(--bg);border-color:var(--text)}
-.sb-actions a.primary:hover{opacity:.9}
+.sb-actions a.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.sb-actions a.primary:hover{opacity:.88}
 .sb-actions svg{width:12px;height:12px}
 
 .sb-socials{display:flex;gap:8px}
@@ -129,7 +120,7 @@ aside.sidebar{position:sticky;top:64px;align-self:start;height:calc(100vh - 128p
   width:32px;height:32px;border-radius:8px;border:1px solid var(--line);background:var(--surface);
   display:grid;place-items:center;color:var(--text-2);transition:all .15s;
 }
-.sb-socials a:hover{color:var(--text);border-color:var(--line-2)}
+.sb-socials a:hover{color:var(--accent);border-color:var(--accent)}
 .sb-socials svg{width:14px;height:14px}
 
 [data-theme="light"] #iconMoon{display:block}
@@ -148,7 +139,7 @@ section:first-of-type{padding-top:0}
   letter-spacing:.12em;text-transform:uppercase;font-weight:600;font-family:'JetBrains Mono',monospace;
   padding-bottom:18px;margin-bottom:32px;border-bottom:1px solid var(--line);
 }
-.kicker .num{color:var(--text-3)}
+.kicker .num{color:var(--accent)}
 .kicker .lbl{color:var(--text)}
 
 h1.intro{
@@ -156,7 +147,7 @@ h1.intro{
   line-height:1.08;letter-spacing:-.035em;font-weight:600;
   margin-bottom:24px;max-width:22ch;
 }
-h1.intro em{font-style:normal;color:var(--text-2);font-weight:400}
+h1.intro em{font-style:normal;color:var(--accent);font-weight:600}
 
 p.lede{
   font-size:17px;line-height:1.6;color:var(--text-2);margin-bottom:20px;max-width:62ch;font-weight:400;
@@ -178,7 +169,7 @@ h2.section-title{
 .ib-row .k{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--text-3);letter-spacing:.06em;text-transform:uppercase;font-weight:500}
 .ib-row .v{color:var(--text);font-weight:500}
 .ib-row .v a{color:var(--text);text-decoration:none;border-bottom:1px solid var(--line-2);transition:border-color .15s}
-.ib-row .v a:hover{border-color:var(--text)}
+.ib-row .v a:hover{border-color:var(--accent);color:var(--accent)}
 .ib-row .v .tag{font-family:'JetBrains Mono',monospace;font-size:11px;padding:2px 7px;border-radius:5px;background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);margin-right:4px;display:inline-block;font-weight:500;margin-bottom:3px}
 
 /* ABOUT */
@@ -191,7 +182,7 @@ h2.section-title{
   margin-top:32px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;
 }
 .hl-item{background:var(--surface);padding:18px 20px}
-.hl-num{font-size:28px;font-weight:600;letter-spacing:-.03em;line-height:1;font-feature-settings:"tnum","ss01"}
+.hl-num{font-size:28px;font-weight:600;letter-spacing:-.03em;line-height:1;font-feature-settings:"tnum","ss01";color:var(--accent)}
 .hl-label{font-size:12px;color:var(--text-2);margin-top:4px;letter-spacing:.005em}
 
 /* EXPERIENCE */
@@ -203,7 +194,7 @@ h2.section-title{
   align-items:start;
 }
 .exp-row:last-child{border-bottom:1px solid var(--line)}
-.exp-row:hover{padding-left:6px}
+.exp-row:hover{padding-left:6px;border-top-color:var(--accent)}
 .exp-when{
   font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-3);
   padding-top:2px;letter-spacing:.01em;font-weight:450;
@@ -227,7 +218,7 @@ h2.section-title{
 .proj .head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:10px}
 .proj .head .title{font-size:18px;font-weight:600;letter-spacing:-.015em;display:flex;align-items:center;gap:8px}
 .proj .head .ext{color:var(--text-3);transition:color .15s, transform .2s}
-.proj[href]:hover .ext{color:var(--text);transform:translate(2px,-2px)}
+.proj[href]:hover .ext{color:var(--accent);transform:translate(2px,-2px)}
 .proj .head .meta{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--text-3);letter-spacing:.02em}
 .proj .head .meta .live{
   display:inline-flex;align-items:center;gap:5px;color:var(--good);font-weight:500;margin-right:8px;
@@ -254,7 +245,7 @@ h2.section-title{
 }
 .sk-row .sk-desc{font-size:13.5px;color:var(--text-2);line-height:1.55;margin-bottom:8px;max-width:50ch}
 .sk-row .sk-tags{display:flex;gap:5px;flex-wrap:wrap}
-.sk-tag{
+.sk-tag{transition:border-color .15s,color .15s;}.sk-tag:hover{border-color:var(--accent);color:var(--accent);}.sk-tag-x{
   font-family:'JetBrains Mono',monospace;
   font-size:11px;padding:2px 7px;border-radius:5px;
   background:var(--surface);border:1px solid var(--line);color:var(--text-2);font-weight:500;
@@ -294,7 +285,7 @@ h2.section-title{
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;border-top:1px solid var(--line);padding-top:20px}
 .contact-grid > div h5{font-size:11.5px;color:var(--text-3);letter-spacing:.06em;text-transform:uppercase;font-weight:600;margin-bottom:10px}
 .contact-grid > div a{display:block;color:var(--text);text-decoration:none;font-size:14px;padding:3px 0;transition:color .15s}
-.contact-grid > div a:hover{color:var(--text-2)}
+.contact-grid > div a:hover{color:var(--accent)}
 .contact-grid > div small{display:block;font-size:11.5px;color:var(--text-3);margin-top:2px}
 
 /* Form */
@@ -307,7 +298,7 @@ h2.section-title{
   padding:10px 12px;color:var(--text);font:inherit;font-size:14px;outline:none;
   transition:border-color .15s, box-shadow .15s;
 }
-.field input:focus, .field textarea:focus{border-color:var(--text);box-shadow:0 0 0 3px var(--accent-soft)}
+.field input:focus, .field textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
 .field textarea{resize:vertical;min-height:90px}
 .submit{
   width:100%;background:var(--text);color:var(--bg);border:none;border-radius:8px;
@@ -456,7 +447,7 @@ h2.section-title{
         <div class="ib-row"><div class="k">Flagship</div><div class="v"><a href="https://tpcdm.com" target="_blank" rel="noopener">Proponisi — Contact Center Performance Platform</a></div></div>
         <div class="ib-row"><div class="k">Stack</div><div class="v"><span class="tag">.NET / C#</span><span class="tag">React</span><span class="tag">SQL Server</span><span class="tag">Node.js</span><span class="tag">Elasticsearch</span></div></div>
         <div class="ib-row"><div class="k">Compliance</div><div class="v"><span class="tag">SOC 2</span><span class="tag">HIPAA</span><span class="tag">PCI DSS 4.0.1</span><span class="tag">NIST 800-53</span></div></div>
-        <div class="ib-row"><div class="k">Status</div><div class="v" style="color:var(--good)">● Open to senior roles &amp; contract work</div></div>
+        <div class="ib-row"><div class="k">Status</div><div class="v" style="color:var(--good)">● Open to senior roles & contract work</div></div>
       </div>
     </section>
 
@@ -466,7 +457,7 @@ h2.section-title{
 
       <div class="about">
         <p>Senior Software Engineer with 8 years of experience at <strong>VarChar Solutions Pvt. Ltd.</strong>, the majority spent building <strong>Proponisi</strong> — a contact center performance platform powering AI-driven quality assurance, real-time agent coaching, gamification, and LMS for Fortune-level enterprises. Currently serving as Team Lead. SOC 2, HIPAA, PCI DSS 4.0.1, and NIST 800-53 certified.</p>
-        <p>As a <strong>Software Engineer</strong>, also delivered BioLogistic Solutions CRM — a healthcare platform with telemedicine, e-prescribe, and telephony integrations connecting pharmacies, labs, doctors, and patients.</p>
+        <p>Also delivered BioLogistic Solutions CRM — a healthcare platform with telemedicine, e-prescribe, and telephony integrations connecting pharmacies, labs, doctors, and patients.</p>
       </div>
 
       <div class="highlights">
@@ -497,7 +488,7 @@ h2.section-title{
           <div class="exp-body">
             <h4>Senior Software Engineer</h4>
             <div class="org">VarChar Solutions Pvt. Ltd.</div>
-            <p>Senior engineer on Proponisi. Integrated IBM Watson and Elasticsearch; designed multi-tenant data schemas; shipped auto-QA, real-time coaching, and telephony features.</p>
+            <p>Senior engineer on Proponisi and BioLogistic Solutions CRM. Integrated IBM Watson, Twilio, and Elasticsearch; designed multi-tenant data schemas; shipped auto-QA, real-time coaching, and telephony features.</p>
           </div>
           <div class="exp-side">2 yrs</div>
         </div>
@@ -507,7 +498,7 @@ h2.section-title{
           <div class="exp-body">
             <h4>Software Engineer</h4>
             <div class="org">VarChar Solutions Pvt. Ltd.</div>
-            <p>Built core modules across the platform: REST APIs, MVC business logic, jQuery and early React UIs, and SQL Server data layers. Also delivered BioLogistic Solutions CRM — a healthcare platform with telemedicine, e-prescribe, SMS messaging, and Twilio telephony integrations.</p>
+            <p>Built core modules across the platform: REST APIs, MVC business logic, jQuery and early React UIs, and SQL Server data layers. Foundation work that grew into the systems above.</p>
           </div>
           <div class="exp-side">5 yrs</div>
         </div>
@@ -525,9 +516,9 @@ h2.section-title{
             <div class="title">Proponisi — Contact Center Performance Platform <span class="ext">↗</span></div>
             <div class="meta"><span class="live">Live</span>2018 — Present</div>
           </div>
-          <p>Enterprise SaaS — AI-powered quality assurance, real-time agent assist, automated coaching, and LMS. Gamification suite includes leaderboards, badges, achievements, challenges, points system, rewards, and Jeopardy-style training games. Covers 100% QA of all interactions. Deployed across healthcare, fintech, and tolling sectors. SOC 2, HIPAA, PCI DSS 4.0.1, and NIST 800-53 compliant.</p>
+          <p>Enterprise SaaS — AI-powered quality assurance, real-time agent assist, automated coaching, gamification, and LMS. Covers 100% QA of all interactions. Deployed across healthcare, fintech, and tolling sectors. SOC 2, HIPAA, PCI DSS 4.0.1, and NIST 800-53 compliant.</p>
           <div class="stack">
-            <span class="tag">.NET / C#</span><span class="tag">React</span><span class="tag">SQL Server</span><span class="tag">Elasticsearch</span><span class="tag">Auto-QA</span><span class="tag">Real-time</span><span class="tag">Gamification</span><span class="tag">LMS</span><span class="tag">Multi-tenant SaaS</span>
+            <span class="tag">.NET</span><span class="tag">React</span><span class="tag">SQL Server</span><span class="tag">Elasticsearch</span><span class="tag">NLP / Auto-QA</span><span class="tag">Real-time</span><span class="tag">Multi-tenant SaaS</span>
           </div>
         </a>
 
@@ -538,7 +529,7 @@ h2.section-title{
           </div>
           <p>Healthcare CRM connecting pharmacies, labs, doctors, and patients. Includes telemedicine, mail-order prescriptions, e-scribe, SMS messaging, and fax broadcasting.</p>
           <div class="stack">
-            <span class="tag">.NET / C#</span><span class="tag">SQL Server</span><span class="tag">Twilio</span><span class="tag">HIPAA</span><span class="tag">e-Prescribe</span><span class="tag">Telephony</span>
+            <span class="tag">.NET / MVC</span><span class="tag">SQL Server</span><span class="tag">Twilio</span><span class="tag">HIPAA</span><span class="tag">e-Prescribe</span><span class="tag">Telephony</span>
           </div>
         </a>
 
@@ -550,27 +541,6 @@ h2.section-title{
           <p>Auto-QA pipeline within Proponisi reviewing 100% of contact center interactions for compliance, sentiment, and coaching opportunities — replacing manual spot-check sampling.</p>
           <div class="stack">
             <span class="tag">NLP</span><span class="tag">Python</span><span class="tag">LLM APIs</span><span class="tag">Sentiment analysis</span><span class="tag">Compliance</span>
-          </div>
-        </div>
-
-        <div class="proj" style="cursor:default">
-          <div class="head">
-            <div class="title">Proponisi Assist — RAG Chatbot</div>
-            <div class="meta"><span class="live">Live</span>Proponisi module · 2024 — Present</div>
-          </div>
-          <p>Retrieval-Augmented Generation chatbot built for Proponisi, enabling agents and supervisors to query platform knowledge, interaction history, and compliance documentation through natural language. Powered by OpenAI with Elasticsearch as the vector store.</p>
-          <div class="stack">
-            <span class="tag">RAG</span><span class="tag">OpenAI</span><span class="tag">Elasticsearch</span><span class="tag">LangChain</span><span class="tag">Vector DB</span><span class="tag">NLP</span>
-          </div>
-        </div>
-        <div class="proj" style="cursor:default">
-          <div class="head">
-            <div class="title">Proponisi for Microsoft Teams</div>
-            <div class="meta">Proponisi module · Internal</div>
-          </div>
-          <p>Microsoft Teams app bringing Proponisi agent dashboards directly into the Teams interface — giving agents and supervisors real-time performance metrics, QA scores, and coaching insights without leaving their collaboration tool.</p>
-          <div class="stack">
-            <span class="tag">MS Teams</span><span class="tag">Bot Framework</span><span class="tag">Azure</span><span class="tag">.NET / C#</span><span class="tag">Real-time</span>
           </div>
         </div>
       </div>
@@ -585,7 +555,7 @@ h2.section-title{
           <div class="sk-label">Backend engineering</div>
           <div>
             <div class="sk-desc">REST APIs, MVC architecture, business logic layers, multi-tenant SaaS systems.</div>
-            <div class="sk-tags"><span class="sk-tag">.NET / C#</span><span class="sk-tag">Node.js</span><span class="sk-tag">Python</span><span class="sk-tag">MVC</span><span class="sk-tag">React</span><span class="sk-tag">SignalR</span><span class="sk-tag">Bot Framework</span></div>
+            <div class="sk-tags"><span class="sk-tag">.NET / C#</span><span class="sk-tag">Node.js</span><span class="sk-tag">Python</span><span class="sk-tag">MVC</span><span class="sk-tag">React</span></div>
           </div>
         </div>
         <div class="sk-row">
@@ -599,35 +569,28 @@ h2.section-title{
           <div class="sk-label">AI / NLP integration</div>
           <div>
             <div class="sk-desc">AI quality assurance, sentiment analysis, real-time agent assist, automated coaching pipelines.</div>
-            <div class="sk-tags"><span class="sk-tag">NLP</span><span class="sk-tag">Auto-QA</span><span class="sk-tag">LLM APIs</span><span class="sk-tag">IBM Watson</span><span class="sk-tag">Soniox</span><span class="sk-tag">Deepgram</span><span class="sk-tag">HuggingFace</span><span class="sk-tag">LangChain</span><span class="sk-tag">Analytics</span></div>
+            <div class="sk-tags"><span class="sk-tag">NLP</span><span class="sk-tag">Auto-QA</span><span class="sk-tag">LLM APIs</span><span class="sk-tag">Analytics</span></div>
           </div>
         </div>
         <div class="sk-row">
-          <div class="sk-label">Database &amp; storage</div>
+          <div class="sk-label">Database & storage</div>
           <div>
             <div class="sk-desc">Schema design, query optimization, relational data modelling for complex multi-stakeholder systems.</div>
             <div class="sk-tags"><span class="sk-tag">SQL Server</span><span class="sk-tag">PostgreSQL</span><span class="sk-tag">Entity Framework</span><span class="sk-tag">Elasticsearch</span></div>
           </div>
         </div>
         <div class="sk-row">
-          <div class="sk-label">Telephony &amp; messaging</div>
+          <div class="sk-label">Telephony & messaging</div>
           <div>
             <div class="sk-desc">Caller ID routing, SMS broadcasting, fax systems, telephone switch integration.</div>
-            <div class="sk-tags"><span class="sk-tag">Twilio</span><span class="sk-tag">VoIP</span><span class="sk-tag">SMS</span><span class="sk-tag">Fax APIs</span><span class="sk-tag">FCM</span></div>
+            <div class="sk-tags"><span class="sk-tag">Twilio</span><span class="sk-tag">VoIP</span><span class="sk-tag">SMS</span><span class="sk-tag">Fax APIs</span></div>
           </div>
         </div>
         <div class="sk-row">
-          <div class="sk-label">DevOps &amp; tooling</div>
-          <div>
-            <div class="sk-desc">Source control, cloud infrastructure, containerisation, and automated deployment pipelines.</div>
-            <div class="sk-tags"><span class="sk-tag">Git</span><span class="sk-tag">Azure</span><span class="sk-tag">Docker</span><span class="sk-tag">CI/CD</span><span class="sk-tag">Make.com</span></div>
-          </div>
-        </div>
-        <div class="sk-row">
-          <div class="sk-label">Compliance &amp; security</div>
+          <div class="sk-label">Compliance & security</div>
           <div>
             <div class="sk-desc">Enterprise-grade security across regulated healthcare and financial verticals.</div>
-            <div class="sk-tags"><span class="sk-tag">SOC 2</span><span class="sk-tag">HIPAA</span><span class="sk-tag">PCI DSS 4.0.1</span><span class="sk-tag">NIST 800-53</span></div>
+            <div class="sk-tags"><span class="sk-tag">SOC 2</span><span class="sk-tag">HIPAA</span><span class="sk-tag">PCI DSS</span><span class="sk-tag">NIST 800-53</span></div>
           </div>
         </div>
       </div>
@@ -635,7 +598,7 @@ h2.section-title{
 
     <section id="education">
       <div class="kicker"><span class="num">05</span><span class="lbl">Education</span></div>
-      <h2 class="section-title">Education &amp; certifications.</h2>
+      <h2 class="section-title">Education & certifications.</h2>
 
       <div class="edu-list">
         <div class="edu-row">
@@ -782,6 +745,85 @@ h2.section-title{
     b.innerHTML = 'Opened Gmail ✓';
     setTimeout(() => b.innerHTML = old, 2200);
   });
+
+  // ── GLOWING DOT CURSOR ──
+  if (window.matchMedia('(pointer: fine)').matches) {
+
+    const dot = Object.assign(document.createElement('div'), { id: 'cur-dot' });
+    document.body.appendChild(dot);
+
+    const style = document.createElement('style');
+    style.textContent = `
+      *, *::before, *::after { cursor: none !important; }
+
+      #cur-dot {
+        position: fixed;
+        top: 0; left: 0;
+        width: 10px; height: 10px;
+        border-radius: 50%;
+        background: #5B47F5;
+        pointer-events: none;
+        z-index: 99999;
+        transform: translate(-50%, -50%);
+        transition: width .25s ease, height .25s ease, opacity .3s ease, box-shadow .25s ease;
+        box-shadow:
+          0 0 6px  2px rgba(91,71,245,.7),
+          0 0 14px 4px rgba(91,71,245,.35),
+          0 0 28px 8px rgba(91,71,245,.15);
+      }
+
+      #cur-dot.hover {
+        width: 18px; height: 18px;
+        box-shadow:
+          0 0 10px  3px rgba(91,71,245,.9),
+          0 0 24px  8px rgba(91,71,245,.5),
+          0 0 48px 16px rgba(91,71,245,.2);
+      }
+
+      #cur-dot.click {
+        width: 8px; height: 8px;
+        box-shadow:
+          0 0 14px  4px rgba(91,71,245,1),
+          0 0 32px 10px rgba(91,71,245,.6),
+          0 0 60px 20px rgba(91,71,245,.25);
+      }
+
+      [data-theme="dark"] #cur-dot {
+        background: #7B6AF7;
+        box-shadow:
+          0 0 6px  2px rgba(123,106,247,.8),
+          0 0 16px 5px rgba(123,106,247,.4),
+          0 0 32px 10px rgba(123,106,247,.18);
+      }
+      [data-theme="dark"] #cur-dot.hover {
+        box-shadow:
+          0 0 12px  4px rgba(123,106,247,1),
+          0 0 28px  9px rgba(123,106,247,.55),
+          0 0 56px 18px rgba(123,106,247,.22);
+      }
+    `;
+    document.head.appendChild(style);
+
+    let cx = -100, cy = -100;
+
+    document.addEventListener('mousemove', e => {
+      cx = e.clientX; cy = e.clientY;
+      dot.style.left = cx + 'px';
+      dot.style.top  = cy + 'px';
+    });
+
+    // Hover state on interactive elements
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => dot.classList.add('hover'));
+      el.addEventListener('mouseleave', () => dot.classList.remove('hover'));
+    });
+
+    document.addEventListener('mousedown', () => { dot.classList.add('click'); dot.classList.remove('hover'); });
+    document.addEventListener('mouseup',   () => { dot.classList.remove('click'); });
+
+    document.addEventListener('mouseleave', () => dot.style.opacity = '0');
+    document.addEventListener('mouseenter', () => dot.style.opacity = '1');
+  }
 </script>
 </body>
 </html>
