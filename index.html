@@ -60,7 +60,8 @@ html{scroll-behavior:smooth}
 
 #scroll-bar{position:fixed;top:0;left:0;height:3px;width:0%;background:var(--accent);z-index:9999;pointer-events:none;transition:width .08s linear}
 
-.sb-avatar{width:72px;height:72px;border-radius:50%;background:var(--surface-2);border:2px solid var(--line);margin-bottom:20px;display:grid;place-items:center;font-size:24px;font-weight:700;color:var(--text-2);letter-spacing:-.02em;overflow:hidden;flex-shrink:0}
+.sb-identity{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+.sb-avatar{width:72px;height:72px;border-radius:50%;background:var(--surface-2);border:2px solid var(--line);display:grid;place-items:center;font-size:24px;font-weight:700;color:var(--text-2);letter-spacing:-.02em;overflow:hidden;flex-shrink:0}
 
 ::view-transition-old(root){animation:.55s cubic-bezier(.4,0,.6,1) both vt-peel-out}
 ::view-transition-new(root){animation:.55s cubic-bezier(.4,0,.6,1) both vt-peel-in;filter:drop-shadow(-10px 0 16px rgba(0,0,0,.18))}
@@ -96,12 +97,12 @@ aside.sidebar{position:sticky;top:64px;align-self:start;height:calc(100vh - 128p
 .sb-mark-text small{display:block;color:var(--text-2);font-weight:400;font-size:12px;letter-spacing:0;margin-top:1px}
 
 .sb-name{
-  font-size:32px;font-weight:600;letter-spacing:-.03em;line-height:1.05;
-  margin-bottom:8px;
+  font-size:26px;font-weight:600;letter-spacing:-.03em;line-height:1.1;
+  margin-bottom:4px;
 }
 .sb-role{
-  font-size:16px;color:var(--text-2);font-weight:400;letter-spacing:-.01em;
-  margin-bottom:10px;
+  font-size:13.5px;color:var(--text-2);font-weight:400;letter-spacing:-.01em;
+  margin-bottom:0;
 }
 .sb-loc{display:flex;align-items:center;gap:8px;color:var(--text-2);font-size:13px;margin-bottom:4px}
 .sb-loc svg{width:13px;height:13px;color:var(--text-3)}
@@ -414,10 +415,13 @@ h2.section-title{
       <div class="sb-mark-text">Parth Mistry <small>Software Engineer</small></div>
     </div>
 
-    <div class="sb-avatar">P</div>
-
-    <h1 class="sb-name">Parth Mistry</h1>
-    <p class="sb-role">Software Engineer · Team Lead</p>
+    <div class="sb-identity">
+      <div class="sb-avatar">P</div>
+      <div>
+        <h1 class="sb-name">Parth Mistry</h1>
+        <p class="sb-role">Software Engineer · Team Lead</p>
+      </div>
+    </div>
 
     <div class="sb-loc">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
