@@ -169,13 +169,7 @@ aside.sidebar::before{
 /* MAIN COLUMN */
 main{max-width:760px;width:100%}
 section{padding:32px 0 80px;scroll-margin-top:32px}
-section:first-of-type{padding-top:0;position:relative}
-section:first-of-type::before{
-  content:'';position:absolute;top:-40px;left:-56px;
-  width:640px;height:340px;
-  background:radial-gradient(ellipse at 0% 0%, var(--accent-soft) 0%, transparent 60%);
-  pointer-events:none;z-index:0;
-}
+section:first-of-type{padding-top:0}
 
 .kicker{
   display:flex;align-items:baseline;gap:10px;
